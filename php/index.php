@@ -63,7 +63,8 @@ mysqli_close($conn);
                     <div class="card-content">
                         <p class="valign-wrapper"><i class="material-icons amber-text">star</i>9,5</p>
                         <span class="card-title"><?=$filme["titulo"]?></span>
-                        <p><?=$filme["sinopse"]?>.</p>
+                        <p><?=$filme["sinopse"]?>.</p><br>
+                        <i>Gênero:<?=$filme["genero"]?></i>
                     </div>
                     <div class="card-action">
                         <a href="#">Comprar</a>
