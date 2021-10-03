@@ -4,7 +4,7 @@ include('../config/conexao.php');
 
 
 $erros = array('titulo' => '', 'sinopse' => '', 'genero' => '', 'capa' => '');
-$titulo = $sinopse = $genero = $capa = '';
+$titulo = $sinopse = $genero = $capa = $is_cartaz ='';
 
 if (isset($_POST['enviar'])) {
 
@@ -65,9 +65,10 @@ if (isset($_POST['enviar'])) {
         $sinopse = mysqli_real_escape_string($conn, $_POST['sinopse']);
         $genero = mysqli_real_escape_string($conn, $_POST['genero']);
         $capa   =  mysqli_real_escape_string($conn, $_POST['capa']);
+        $is_cartaz =  mysqli_real_escape_string($conn, $_POST['is_cartaz']);
 
         //Criando Query
-        $sql = "UPDATE filmes SET titulo ='$titulo',sinopse='$sinopse',genero = '$genero',capa = '$capa' WHERE id = '$idFilme'" ;
+        $sql = "UPDATE filmes SET titulo ='$titulo',sinopse='$sinopse',genero = '$genero',capa = '$capa', is_cartaz = '$is_cartaz'  WHERE id = '$idFilme'" ;
         //Salva no bando de dados
         if (mysqli_query($conn, $sql)) {
             //Sucesso
@@ -79,23 +80,6 @@ if (isset($_POST['enviar'])) {
 }
 ?>
 <?php include('includes/header.php'); ?>
-
-<body>
-    <header>
-        <nav class="nav-extended light-blue darken-2">
-            <div class="nav-wrapper ">
-                <ul id="nav-mobile" class="right">
-                    <li><a href="index.php" class="">Página de Filmes</a></li>
-                    <li><a href="alterarFilme.php" class="active">Alterar Filmes</a></li>
-                    <li><a href="removerFilme.php">Remover Filmes</a></li>
-                </ul>
-            </div>
-            <div class="nav-header center ">
-                <h1>JBCine</h1>
-            </div>
-        </nav>
-    </header>
-
     <div class="row">
         <div class="col s6 offset-s3">
             <div class="card">
@@ -139,9 +123,16 @@ if (isset($_POST['enviar'])) {
                             <!--Input da Capa--->
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <input id="capa" name="capa" type="text" value="<?php echo $capa ?>">
+                                    <input id="capa" name="capa" type="text" value="<?php echo $capa ?> " maxlength = "1">
                                     <label for="capa">Capa URL</label>
                                     <div class="red-text"><?php echo $erros['capa'] . '</br>'; ?></div>
+                                </div>
+                            </div>
+                             <!--Input Cartaz--->
+                             <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="is_cartaz" name="is_cartaz" type="text" value="<?php echo $is_cartaz ?>">
+                                    <label for="is_cartaz">Em cartaz?</label>
                                 </div>
                             </div>
                             <div class="card-action">

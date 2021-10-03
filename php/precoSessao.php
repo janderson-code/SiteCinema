@@ -5,28 +5,6 @@
 ?>
 
 <body>
-    <header>
-        <nav class="nav-extended light-blue darken-2">
-            <div class="nav-wrapper ">
-                <ul id="nav-mobile" class="right">
-                    <li><a href="index.php" class="">Página de Filmes</a></li>
-                    <li><a href="alterarFilme.php">Alterar Filmes</a></li>
-                    <li><a href="removerFilme.php">Remover Filmes</a></li>
-                </ul>
-            </div>
-            <div class="nav-header center ">
-                <h1>JBCine</h1>
-            </div>
-            <div class="nav-content">
-                <ul class="tabs tabs-transparent  blue-grey darken-4">
-                    <li class="tab"><a href="index.php">Home</a></li>
-                    <li class="tab"><a  href="cartaz.php">Em cartaz</a></li>
-                    <li class="tab"><a href="precoSessao.php" class ="active">Preços</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-
     <div class="row">
       <h3>Preços</h3>
       <div class="flex collection grey darken-2 white-text">

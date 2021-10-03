@@ -46,24 +46,6 @@ if (isset($_POST['enviar'])) {
 }
 ?>
 <?php include('includes/header.php'); ?>
-
-<body>
-    <header>
-        <nav class="nav-extended light-blue darken-2">
-            <div class="nav-wrapper ">
-                <ul id="nav-mobile" class="right">
-                    <li><a href="index.php" class="">Página de Filmes</a></li>
-                    <li><a href="cadastrarFilme.php" >Cadastrar Filme</a></li>
-                    <li><a href="alterarFilme.php">Alterar Filmes</a></li>
-                    <li><a href="removerFilme.php" class="active">Remover Filmes</a></li>
-                </ul>
-            </div>
-            <div class="nav-header center ">
-                <h1>JBCine</h1>
-            </div>
-        </nav>
-    </header>
-
     <div class="row">
         <div class="col s6 offset-s3">
             <div class="card">
