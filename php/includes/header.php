@@ -20,7 +20,7 @@
         <nav class="nav-extended light-blue darken-2">
             <div class="nav-wrapper ">
                 <ul id="nav-mobile" class="right">
-                    <li><a href="mostrarFilmes.php" >Pagina de Filmes</a></li>
+                    <li><a href="mostrarFilmes.php">Pagina de Filmes</a></li>
                     <li><a href="cadastrarSessao.php" >Cadastrar Sessão</a></li>
                     <li><a href="cadastrarSessao.php" >Comprar Ingresso</a></li>
             </div>

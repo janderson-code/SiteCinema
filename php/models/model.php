@@ -1,6 +1,7 @@
-<?php 
+<?php
 
-class model{
+class model
+{
 
     public function deleteFilme($conexao, $id)
     {
@@ -8,12 +9,5 @@ class model{
         return mysqli_query($conexao, $query);
     }
 
-    public function alterarFilme($conexao, $id)
-    {
-        $query = "DELETE FROM filmes WHERE id = '{$id}'";
-        return mysqli_query($conexao, $query);
-    }
 
 }
- 
-?>

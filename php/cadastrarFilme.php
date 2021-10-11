@@ -76,7 +76,8 @@ if (isset($_POST['enviar'])) {
 
     if (array_filter($erros)) {
         alert("Erro no Formulario, Digite novamente");
-    } else {
+    } 
+    else {
 
         //echo 'Formulario valido'
         // header('Location: index.php');

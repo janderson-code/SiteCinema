@@ -3,7 +3,7 @@ include('../config/conexao.php');
 
 
 //Query de busca
-$sql = 'SELECT id ,titulo ,sinopse, genero, capa FROM filmes WHERE is_cartaz ="S" Order BY criadoem';
+$sql = 'SELECT * FROM filmes WHERE is_cartaz ="S" Order BY criadoem';
 
 //Resultado como um conjunto de linhas
 $result = mysqli_query($conn, $sql);
@@ -33,8 +33,8 @@ mysqli_close($conn);
     <h3 class="center ">Filmes em Cartaz</h3>
     <div class="row">
         <?php foreach ($filmes as $filme) : ?>
-            <!---CARD COM IMAGENS -->
-            <!-- <div class="col s12 m6 l3">
+        <!---CARD COM IMAGENS -->
+        <!-- <div class="col s12 m6 l3">
                 <div class="card hoverable">       
                     <div class="card-image">                   
                         <img class="card-img" src="<?= $filme["capa"] ?>" alt="Venom capa" />
@@ -51,21 +51,25 @@ mysqli_close($conn);
                     </div>
                 </div>
             </div>    -->
-            <!---CARD COM IMAGENS -->
-            <div class="card col s12 m6 l3 ">
-                <div class="card-image waves-effect waves-block waves-light">
+        <!---CARD COM IMAGENS -->
+        <div class="card col s12 m6 l3 ">
+            <div class="card-image waves-effect waves-block waves-light">
                 <img class="card-img" src="<?= $filme["capa"] ?>" alt="Venom capa" />
-                </div>
-                <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4"><span class="card-title"><?= $filme["titulo"] ?></span><i class="material-icons right">more_vert</i></span>
-                    <p><a href="#">This is a link</a></p>
-                </div>
-                <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4"><span class="card-title"><?= $filme["titulo"] ?></span><i class="material-icons right">close</i></span>
-                    <p><?= $filme["sinopse"] ?>.</p><br>
-                    <i>Gênero:<?= $filme["genero"] ?></i>
-                </div>
             </div>
+            <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4"><span
+                        class="card-title"><?= $filme["titulo"] ?></span><i
+                        class="material-icons right">more_vert</i></span>
+                <p><a href="#">This is a link</a></p>
+            </div>
+            <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4"><span
+                        class="card-title"><?= $filme["titulo"] ?></span><i
+                        class="material-icons right">close</i></span>
+                <p><?= $filme["sinopse"] ?>.</p><br>
+                <i>Gênero:<?= $filme["genero"] ?></i>
+            </div>
+        </div>
         <?php endforeach ?>
         <!-- <div class="col s3">
                 <div class="card hoverable">
@@ -84,7 +88,7 @@ mysqli_close($conn);
             </div>
         </div> -->
 </main>
-<?php include('includes/footer.php'); ?>
+<?php include('../includes/footer.php'); ?>
 </body>
 
 </html>

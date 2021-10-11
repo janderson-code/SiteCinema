@@ -3,8 +3,10 @@ include('../config/conexao.php');
 include('/models/delete.php');
 include('/models/model.php');
 
+$id_filme = $_GET['id'];
+
 //Query de busca
-$sql = 'SELECT id ,titulo ,sinopse, genero, capa FROM filmes Order BY criadoem';
+$sql = 'SELECT * FROM filmes Order BY criadoem';
 
 //Resultado como um conjunto de linhas
 $result = mysqli_query($conn, $sql);
@@ -65,8 +67,8 @@ mysqli_close($conn);
                     <span class="card-title grey-text text-darken-4"><span class="card-title"><?= $filme["titulo"] ?></span><i class="material-icons right">close</i></span>
                     <p><?= $filme["sinopse"] ?>.</p><br>
                     <i>Gênero:<?= $filme["genero"] ?></i><br><br>
-                    <a class="waves-effect waves-light btn-small blue" href="alterarFilme.php"><i class="material-icons right">edit</i></a>
-                    <button class="waves-effect waves-light btn-small red btn-delete" href="javascript:void(0)" onclick="excluir(<?= $filme['id'] ?>)"><i class="material-icons right">delete</i></button>
+                    <a class="waves-effect waves-light btn-small blue" href="alterarFilme.php?id=<?php echo $filme['id'] ?>"><i class="material-icons right">edit</i></a>
+                    <button class="waves-effect waves-light btn-small red " onclick="excluir(<?= $filme['id'] ?>)"><i class="material-icons right">delete</i></button>
                 </div>
             </div>
         <?php endforeach ?>
@@ -75,23 +77,16 @@ mysqli_close($conn);
 </body>
 <script>
     function excluir() {
-        $.ajax({
-            url: "models/delete.php?id=<?= $filme['id'] ?>",
-            type: "GET",
-            success: function() {
-                location.reload();
-            }
-        });
-    }
+        if (confirm("Deseja remover o filme '<?= $filme['titulo'] ?>?' do Catálogo ? ")) {
+            $.ajax({
+                url: "models/delete.php?id=<?= $filme['id'] ?>",
+                type: "GET",
+                success: function() {
+                    location.reload();
+                }
+            });
+        }
 
-    function alterar() {
-        $.ajax({
-            url: "models/alterar.php?id=<?= $filme['id'] ?>",
-            type: "GET",
-            success: function() {
-                location.reload();
-            }
-        });
     }
 </script>
 

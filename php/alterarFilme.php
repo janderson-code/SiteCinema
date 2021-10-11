@@ -1,10 +1,20 @@
 <?php
+session_start();
+include_once('../config/conexao.php');
 
-include('../config/conexao.php');
+$id_filme = $_GET['id'];
+$result_filme = "SELECT * FROM filmes WHERE id = '$id_filme'";
+$resultado_filme = mysqli_query($conn, $result_filme);
+$filmes =  mysqli_fetch_assoc($resultado_filme);
 
+//Função para gerar mensagem de alerta
+function alert($message)
+{
+    echo '<script>alert("' . $message . '");</script>';
+}
 
 $erros = array('titulo' => '', 'sinopse' => '', 'genero' => '', 'capa' => '');
-$titulo = $sinopse = $genero = $capa = $is_cartaz ='';
+$titulo = $sinopse = $genero = $capa = $is_cartaz = '';
 
 if (isset($_POST['enviar'])) {
 
@@ -55,24 +65,23 @@ if (isset($_POST['enviar'])) {
     //Script de Inserção, SALVANDO NO BDADOS ATRAVES DA PAGINA
 
     if (array_filter($erros)) {
+
         echo 'Erro no Formulario';
     } else {
-        //echo 'Formulario valido'
-        // header('Location: index.php');
-        //Limpando de codigos suspeitos
-        $idFilme = mysqli_real_escape_string($conn, $_POST['idFilme']);
-        $titulo = mysqli_real_escape_string($conn, $_POST['titulo']);
-        $sinopse = mysqli_real_escape_string($conn, $_POST['sinopse']);
-        $genero = mysqli_real_escape_string($conn, $_POST['genero']);
-        $capa   =  mysqli_real_escape_string($conn, $_POST['capa']);
-        $is_cartaz =  mysqli_real_escape_string($conn, $_POST['is_cartaz']);
+        $titulo = filter_input(INPUT_POST, 'titulo', FILTER_SANITIZE_STRING);
+        $sinopse = filter_input(INPUT_POST, 'sinopse', FILTER_SANITIZE_STRING);
+        $genero = filter_input(INPUT_POST, 'genero', FILTER_SANITIZE_STRING);
+        $capa= filter_input(INPUT_POST, 'capa', FILTER_SANITIZE_STRING);
+        $is_cartaz = filter_input(INPUT_POST, 'is_cartaz', FILTER_SANITIZE_SPECIAL_CHARS);
 
         //Criando Query
-        $sql = "UPDATE filmes SET titulo ='$titulo',sinopse='$sinopse',genero = '$genero',capa = '$capa', is_cartaz = '$is_cartaz'  WHERE id = '$idFilme'" ;
+        $sql = "UPDATE filmes SET titulo ='$titulo',sinopse='$sinopse',genero = '$genero',capa = '$capa', is_cartaz = '$is_cartaz'  WHERE id = '$id_filme'";
+  
+
         //Salva no bando de dados
         if (mysqli_query($conn, $sql)) {
             //Sucesso
-            header('Location: alterarFilme.php');
+            header("Location: alterarFilme.php?msg=Filme+Alterado+com+sucesso");
         } else {
             echo 'query error:' . mysqli_error($conn);
         }
@@ -80,76 +89,96 @@ if (isset($_POST['enviar'])) {
 }
 ?>
 <?php include('includes/header.php'); ?>
-    <div class="row">
-        <div class="col s6 offset-s3">
-            <div class="card">
-                <div class="card-content">
-                    <span class="card-title center">Alterar Filme</span>
-                    <div class="row">
-                        <form class="col s12" method="POST" action="alterarFilme.php">
-                            <!--Input do ID--->
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <input name="idFilme" id="idFilme" type="text" value="<?php echo $idFilme ?>">
-                                    <label for="idFilme">ID</label>
-                                </div>
+<div class="row">
+    <div class="col s6 offset-s3">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title center">Alterar Filme</span>
+                <div class="row">
+                    <form class="col s12" method="POST" action="alterarFilme.php">
+                        <!--Input do ID--->
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input name="idFilme" id="idFilme" type="hidden" value="<?php echo $filmes["id"]; ?>">
                             </div>
+                        </div>
 
-                            <!--Input do Titulo--->
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <input name="titulo" id="titulo" type="text" value="<?php echo $titulo ?>">
-                                    <label for="titulo">Titulo do Filme</label>
-                                    <div class="red-text"><?php echo $erros['titulo'] . '</br>'; ?></div>
-                                </div>
+                        <!--Input do Titulo--->
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input name="titulo" id="titulo" type="text" value="<?php echo $filmes["titulo"] ?>">
+                                <label for="titulo">Titulo do Filme</label>
+                                <div class="red-text"><?php echo $erros['titulo'] . '</br>'; ?></div>
                             </div>
+                        </div>
 
-                            <!--Input da Sinopse--->
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <textarea id="sinopse" name="sinopse" class="materialize-textarea" value="<?php echo $sinopse ?>"></textarea>
-                                    <label for="sinopse">Sinopse</label>
-                                    <div class="red-text"><?php echo $erros['sinopse'] . '</br>'; ?></div>
-                                </div>
+                        <!--Input da Sinopse--->
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="sinopse" type=text rows="5" cols="33"  name="sinopse" class="materialize-textarea" value="<?php echo $filmes["sinopse"] ?>"></input>
+                                <label for="sinopse">Sinopse</label>
+                                <div class="red-text"><?php echo $erros['sinopse'] . '</br>'; ?></div>
                             </div>
-                            <!--Input do Gênero--->
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <input id="genero" name="genero" type="text" value="<?php echo $genero ?>">
-                                    <label for="genero">Gênero</label>
-                                    <div class="red-text"><?php echo $erros['genero'] . '</br>'; ?></div>
-                                </div>
+                        </div>
+                        <!--Input do Gênero--->
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="genero" name="genero" type="text" value="<?php echo $filmes["genero"] ?>">
+                                <label for="genero">Gênero</label>
+                                <div class="red-text"><?php echo $erros['genero'] . '</br>'; ?></div>
                             </div>
-                            <!--Input da Capa--->
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <input id="capa" name="capa" type="text" value="<?php echo $capa ?> " maxlength = "1">
-                                    <label for="capa">Capa URL</label>
-                                    <div class="red-text"><?php echo $erros['capa'] . '</br>'; ?></div>
-                                </div>
+                        </div>
+                        <!--Input da Capa--->
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="capa" name="capa" type="text" value="<?php echo $filmes["capa"] ?> " maxlength="1">
+                                <label for="capa">Capa URL</label>
+                                <div class="red-text"><?php echo $erros['capa'] . '</br>'; ?></div>
                             </div>
-                             <!--Input Cartaz--->
-                             <div class="row">
-                                <div class="input-field col s12">
-                                    <input id="is_cartaz" name="is_cartaz" type="text" value="<?php echo $is_cartaz ?>">
-                                    <label for="is_cartaz">Em cartaz?</label>
-                                </div>
+                        </div>
+                        <!--Input Cartaz--->
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="is_cartaz" name="is_cartaz" type="text" value="<?php echo $filmes["is_cartaz"] ?>">
+                                <label for="is_cartaz">Em cartaz?</label>
                             </div>
-                            <div class="card-action">
-                                <a class="btn waves-effect waves-light grey btn " href="index.php">Cancelar</a>
-                                <button class="btn waves-effect waves-light green " type="reset" name="action">Limpar
-                                    <i class="material-icons right">send</i>
-                                </button>
-                                <button class="btn waves-effect waves-light light-blue darken-2" value="enviar" type="submit" name="enviar">Alterar
-                                    <i class="material-icons right">mode_edit</i>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+                        <div class="card-action">
+                            <a class="btn waves-effect waves-light grey btn " href="index.php">Cancelar</a>
+
+                            <a class="btn waves-effect waves-light green" onclick="limparForm()" type="button" value="limpar">Limpar
+                                <i class="material-icons right">clear</i>
+                            </a>
+
+                            <button class="btn waves-effect waves-light light-blue darken-2" value="enviar" type="submit" name="enviar">Alterar
+                                <i class="material-icons right">mode_edit</i>
+                            </button>
+                        </div>
+                    </form>
                 </div>
-
             </div>
         </div>
     </div>
-    <?php include('includes/footer.php'); ?>
+</div>
+<?php include('includes/footer.php'); ?>
 </body>
+<!--script para botão Limpar campos--->
+<script>
+    function limparForm() {
+
+        const input = document.getElementsByTagName("input");
+
+        for (prop of input) {
+            prop.value = "";
+        }
+
+    }
+</script>
+<!--script para gerar alerta após submit Linha 97--->
+<?php if (isset($_GET["msg"])) : ?>
+    <script>
+        M.toast({
+            html: '<?= $_GET["msg"] ?>'
+        });
+    </script>
+<?php endif ?>
