@@ -2,7 +2,7 @@
 session_start();
 include_once('../config/conexao.php');
 
-$id_filme = $_GET['id'];
+$id_filme =  filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 $result_filme = "SELECT * FROM filmes WHERE id = '$id_filme'";
 $resultado_filme = mysqli_query($conn, $result_filme);
 $filmes =  mysqli_fetch_assoc($resultado_filme);
@@ -68,15 +68,16 @@ if (isset($_POST['enviar'])) {
 
         echo 'Erro no Formulario';
     } else {
-        $titulo = filter_input(INPUT_POST, 'titulo', FILTER_SANITIZE_STRING);
-        $sinopse = filter_input(INPUT_POST, 'sinopse', FILTER_SANITIZE_STRING);
-        $genero = filter_input(INPUT_POST, 'genero', FILTER_SANITIZE_STRING);
-        $capa= filter_input(INPUT_POST, 'capa', FILTER_SANITIZE_STRING);
-        $is_cartaz = filter_input(INPUT_POST, 'is_cartaz', FILTER_SANITIZE_SPECIAL_CHARS);
+
+        $id= filter_input(INPUT_POST, 'id', FILTER_SANITIZE_STRING);
+        $titulo = mysqli_real_escape_string($conn, $_POST['titulo']);
+        $sinopse = mysqli_real_escape_string($conn, $_POST['sinopse']);
+        $genero = mysqli_real_escape_string($conn, $_POST['genero']);
+        $capa   =  mysqli_real_escape_string($conn, $_POST['capa']);
+        $is_cartaz =  mysqli_real_escape_string($conn, $_POST['is_cartaz']);
 
         //Criando Query
-        $sql = "UPDATE filmes SET titulo ='$titulo',sinopse='$sinopse',genero = '$genero',capa = '$capa', is_cartaz = '$is_cartaz'  WHERE id = '$id_filme'";
-  
+        $sql = "UPDATE filmes SET titulo ='$titulo',sinopse='$sinopse',genero = '$genero',capa = '$capa', is_cartaz = '$is_cartaz'  WHERE id = '$id'";
 
         //Salva no bando de dados
         if (mysqli_query($conn, $sql)) {
@@ -99,14 +100,14 @@ if (isset($_POST['enviar'])) {
                         <!--Input do ID--->
                         <div class="row">
                             <div class="input-field col s12">
-                                <input name="idFilme" id="idFilme" type="hidden" value="<?php echo $filmes["id"]; ?>">
+                                <input name="id" id="id" type="hidden" value="<?php echo $filmes['id']; ?>">
                             </div>
                         </div>
 
                         <!--Input do Titulo--->
                         <div class="row">
                             <div class="input-field col s12">
-                                <input name="titulo" id="titulo" type="text" value="<?php echo $filmes["titulo"] ?>">
+                                <input name="titulo" id="titulo" type="text" value="<?php echo $filmes['titulo'] ?>">
                                 <label for="titulo">Titulo do Filme</label>
                                 <div class="red-text"><?php echo $erros['titulo'] . '</br>'; ?></div>
                             </div>
@@ -115,7 +116,7 @@ if (isset($_POST['enviar'])) {
                         <!--Input da Sinopse--->
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="sinopse" type=text rows="5" cols="33"  name="sinopse" class="materialize-textarea" value="<?php echo $filmes["sinopse"] ?>"></input>
+                                <input id="sinopse" type=text rows="5" cols="33" name="sinopse" class="materialize-textarea" value="<?php echo $filmes["sinopse"] ?>"></input>
                                 <label for="sinopse">Sinopse</label>
                                 <div class="red-text"><?php echo $erros['sinopse'] . '</br>'; ?></div>
                             </div>
@@ -123,7 +124,7 @@ if (isset($_POST['enviar'])) {
                         <!--Input do Gênero--->
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="genero" name="genero" type="text" value="<?php echo $filmes["genero"] ?>">
+                                <input id="genero" name="genero" type="text" value="<?php echo $filmes['genero'] ?>">
                                 <label for="genero">Gênero</label>
                                 <div class="red-text"><?php echo $erros['genero'] . '</br>'; ?></div>
                             </div>
@@ -131,7 +132,7 @@ if (isset($_POST['enviar'])) {
                         <!--Input da Capa--->
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="capa" name="capa" type="text" value="<?php echo $filmes["capa"] ?> " maxlength="1">
+                                <input id="capa" name="capa" type="text" value="<?php echo $filmes['capa'] ?> " maxlength="1">
                                 <label for="capa">Capa URL</label>
                                 <div class="red-text"><?php echo $erros['capa'] . '</br>'; ?></div>
                             </div>
@@ -139,7 +140,7 @@ if (isset($_POST['enviar'])) {
                         <!--Input Cartaz--->
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="is_cartaz" name="is_cartaz" type="text" value="<?php echo $filmes["is_cartaz"] ?>">
+                                <input id="is_cartaz" name="is_cartaz" type="text" value="<?php echo $filmes['is_cartaz'] ?>">
                                 <label for="is_cartaz">Em cartaz?</label>
                             </div>
                         </div>
@@ -174,7 +175,7 @@ if (isset($_POST['enviar'])) {
 
     }
 </script>
-<!--script para gerar alerta após submit Linha 97--->
+<!--script para gerar mensagem confirmação de alteração--->
 <?php if (isset($_GET["msg"])) : ?>
     <script>
         M.toast({

@@ -76,6 +76,7 @@ mysqli_close($conn);
 <?php include('includes/footer.php'); ?>
 </body>
 <script>
+    // Código para exclusão do item ao clicar no button de deletar.
     function excluir() {
         if (confirm("Deseja remover o filme '<?= $filme['titulo'] ?>?' do Catálogo ? ")) {
             $.ajax({
