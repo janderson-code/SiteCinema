@@ -2,7 +2,7 @@
 
 include('../config/conexao.php');
 
-$erros = array('horario' => '','dt_sessao' => '','qtd_assento_disp' => '','valor_ingresso' => '');
+  $erros = array('horario' => '','dt_sessao' => '','qtd_assento_disp' => '','valor_ingresso' => '');
   $horario  = $dt_sessao = $qtd_assento_disp = $valor_ingresso = '';
 
 

@@ -12,7 +12,6 @@ function alert($message)
 {
     echo '<script>alert("' . $message . '");</script>';
 }
-
 $erros = array('titulo' => '', 'sinopse' => '', 'genero' => '', 'capa' => '');
 $titulo = $sinopse = $genero = $capa = $is_cartaz = '';
 
@@ -88,6 +87,7 @@ if (isset($_POST['enviar'])) {
         }
     }
 }
+
 ?>
 <?php include('includes/header.php'); ?>
 <div class="row">
