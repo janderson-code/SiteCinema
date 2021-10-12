@@ -111,10 +111,10 @@ if (isset($_POST['enviar'])) {
                                     <div class="red-text"><?php echo $erros['dt_sessao'].'</br>'; ?></div>
                                 </div>
                             </div>
-                            <!--Input Sala disponiveis--->
+                            <!--Input Assento disponiveis--->
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <input name="qtd_assento_disp" id="qtd_assento_disp" type="number"step="0.1" value="<?php echo $sessoes['qtd_assento_disp']?> ">
+                                    <input name="qtd_assento_disp" id="qtd_assento_disp" type="number"step="0.1" value="<?php echo $sessoes['qtd_assento_disp']?>">
                                     <label for="qtd_assento_disp">Quantidade de assentos Disponiveis</label>
                                 </div>
                             </div>
