@@ -2,8 +2,8 @@
 
 include('../config/conexao.php');
 
-  $erros = array('horario' => '','dt_sessao' => '','qtd_assento_disp' => '','valor_ingresso' => '');
-  $horario  = $dt_sessao = $qtd_assento_disp = $valor_ingresso = '';
+$erros = array('horario' => '', 'dt_sessao' => '', 'qtd_assento_disp' => '', 'valor_ingresso' => '');
+$horario  = $dt_sessao = $qtd_assento_disp = $valor_ingresso = '';
 
 
 
@@ -11,6 +11,12 @@ $date_regex = '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$/';
 $time_regex = '/^([0-9]+):([0-5][0-9])$/';
 $float_regex = '/[^0-9(.{2})]/';
 
+
+//Função para gerar mensagem de alerta
+function alert($message)
+{
+    echo '<script>alert("' . $message . '");</script>';
+}
 
 
 if (isset($_POST['enviar'])) {
@@ -27,7 +33,7 @@ if (isset($_POST['enviar'])) {
             $horario = '';
         }
     }
-   
+
     //Verifica Data
     if (empty($_POST['dt_sessao'])) {
         $erros['dt_sessao'] = 'Campo não pode ser vazio <br/>';
@@ -74,7 +80,7 @@ if (isset($_POST['enviar'])) {
         $dt_sessao = mysqli_real_escape_string($conn, $_POST['dt_sessao']);
         $qtd_assento_disp = mysqli_real_escape_string($conn, $_POST['qtd_assento_disp']);
         $valor_ingresso = mysqli_real_escape_string($conn, $_POST['valor_ingresso']);
-        
+
 
 
         //Criando Query
@@ -83,7 +89,7 @@ if (isset($_POST['enviar'])) {
         //Salva no bando de dados
         if (mysqli_query($conn, $sql)) {
             //Sucesso
-            header('Location: cadastrarSessao.php');
+            header('Location: cadastrarSessao.php?msg=Sessão+cadastrada+com+sucesso');
         } else {
             echo 'query error:' . mysqli_error($conn);
         }
@@ -92,71 +98,79 @@ if (isset($_POST['enviar'])) {
 ?>
 
 <?php include('includes/header.php'); ?>
-    <div class="row">
-        <div class="col s6 offset-s3">
-            <div class="card">
-                <div class="card-content">
-                    <span class="card-title center">Cadastrar Sessão</span>
-                    <div class="row">
-                        <form class="col s12" method="POST" action="cadastrarSessao.php" >
-                            <!--Input do ID Filme--->
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <input name="id_filme" id="id_filme" type="text" value="<?php echo $idFilme ?>">
-                                    <label for="id_filme">ID do filme</label>
-                                </div>
+<div class="row">
+    <div class="col s6 offset-s3">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title center">Cadastrar Sessão</span>
+                <div class="row">
+                    <form class="col s12" method="POST" action="cadastrarSessao.php">
+                        <!--Input do ID Filme--->
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input name="id_filme" id="id_filme" type="text" value="<?php echo $idFilme ?>">
+                                <label for="id_filme">ID do filme</label>
                             </div>
-                            <!--Input do Numero da sala--->
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <input name="num_sala" id="num_sala" type="number" value="<?php echo $num_sala ?>">
-                                    <label for="num_sala">Numero da sala</label>
-                                </div>
+                        </div>
+                        <!--Input do Numero da sala--->
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input name="num_sala" id="num_sala" type="number" value="<?php echo $num_sala ?>">
+                                <label for="num_sala">Numero da sala</label>
                             </div>
-                            <!--Input da hora--->
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <input id="horario" name="horario" type="time" value="<?php echo $horario ?>">
-                                    <label for="horario">Horário</label>
-                                    <div class="red-text"><?php echo $erros['horario'].'</br>'; ?></div>
-                                </div>
+                        </div>
+                        <!--Input da hora--->
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="horario" name="horario" type="time" value="<?php echo $horario ?>">
+                                <label for="horario">Horário</label>
+                                <div class="red-text"><?php echo $erros['horario'] . '</br>'; ?></div>
                             </div>
-                            <!--Input da data--->
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <input name="dt_sessao" id="dt_sessao" type="date" value="<?php echo $dt_sessao?>">
-                                    <label for="dt_sessao">Data</label>
-                                    <div class="red-text"><?php echo $erros['dt_sessao'].'</br>'; ?></div>
-                                </div>
+                        </div>
+                        <!--Input da data--->
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input name="dt_sessao" id="dt_sessao" type="date" value="<?php echo $dt_sessao ?>">
+                                <label for="dt_sessao">Data</label>
+                                <div class="red-text"><?php echo $erros['dt_sessao'] . '</br>'; ?></div>
                             </div>
-                            <!--Input Assento disponiveis--->
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <input name="qtd_assento_disp" id="qtd_assento_disp" type="number"step="0.1" value="<?php echo $qtd_assento_disp ?>">
-                                    <label for="qtd_assento_disp">Quantidade de Assentos Disponiveis</label>
-                                </div>
+                        </div>
+                        <!--Input Assento disponiveis--->
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input name="qtd_assento_disp" id="qtd_assento_disp" type="number" step="0.1" value="<?php echo $qtd_assento_disp ?>">
+                                <label for="qtd_assento_disp">Quantidade de Assentos Disponiveis</label>
                             </div>
-                             <!--Input Valor do Ingresso--->
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <input name="valor_ingresso" id="valor_ingresso" type ="number" step="0.1" value="<?php echo $valor_ingresso ?>">
-                                    <label for="valor_ingresso">Valor do Ingresso</label>
-                                </div>
-                            </div>                           
-                            <div class="card-action">
-                                <a class="btn waves-effect waves-light grey btn " href="index.php">Cancelar</a>
-                                <button class="btn waves-effect waves-light green " type="reset" name="action">Limpar
-                                    <i class="material-icons right">send</i>
-                                </button>
-                                <button class="btn waves-effect waves-light light-blue darken-2" value="enviar" type="submit" name="enviar">Cadastrar
-                                    <i class="material-icons right">send</i>
-                                </button>
+                        </div>
+                        <!--Input Valor do Ingresso--->
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input name="valor_ingresso" id="valor_ingresso" type="number" step="0.1" value="<?php echo $valor_ingresso ?>">
+                                <label for="valor_ingresso">Valor do Ingresso</label>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                        <div class="card-action">
+                            <a class="btn waves-effect waves-light grey btn " href="index.php">Cancelar</a>
+                            <button class="btn waves-effect waves-light green " type="reset" name="action">Limpar
+                                <i class="material-icons right">send</i>
+                            </button>
+                            <button class="btn waves-effect waves-light light-blue darken-2" value="enviar" type="submit" name="enviar">Cadastrar
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-    <?php include('includes/footer.php'); ?>
+</div>
+<?php include('includes/footer.php'); ?>
 </body>
+<!--script para gerar alerta após submit Linha 97--->
+<?php if (isset($_GET["msg"])) : ?>
+    <script>
+        M.toast({
+            html: '<?= $_GET["msg"] ?>'
+        });
+    </script>
+<?php endif ?>

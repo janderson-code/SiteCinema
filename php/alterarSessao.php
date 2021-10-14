@@ -1,6 +1,6 @@
 <?php
-
-include('../config/conexao.php');
+session_start();
+include_once('../config/conexao.php');
 
 $id_sessao =  filter_input(INPUT_GET, 'id_sessao', FILTER_SANITIZE_NUMBER_INT);
 $result_sessao = "SELECT * FROM sessao WHERE id_sessao = '$id_sessao'";
@@ -44,7 +44,7 @@ if (isset($_POST['enviar'])) {
         //echo 'Formulario valido'
         // header('Location: index.php');
         //Limpando de codigos suspeitos
-        $id_sessao = filter_input(INPUT_POST, 'id_sessao', FILTER_SANITIZE_STRING);
+        $id = filter_input(INPUT_POST, 'id_sessao', FILTER_SANITIZE_STRING);
         $id_Filme = mysqli_real_escape_string($conn, $_POST['id_filme']);
         $num_sala = mysqli_real_escape_string($conn, $_POST['num_sala']);
         $horario = mysqli_real_escape_string($conn, $_POST['horario']);
@@ -55,12 +55,12 @@ if (isset($_POST['enviar'])) {
 
 
         //Criando Query
-        $sql = "UPDATE sessao SET id_filme = '$id_Filme', num_sala ='$num_sala', horario = '$horario',data_sessao = '$dt_sessao',qtd_assento_disp = '$qtd_assento_disp',valor_ingresso = '$valor_ingresso' WHERE id_sessao = '$id_sessao'";
+        $sql = "UPDATE sessao SET id_filme = '$id_Filme', num_sala ='$num_sala', horario = '$horario',data_sessao = '$dt_sessao',qtd_assento_disp = '$qtd_assento_disp',valor_ingresso = '$valor_ingresso' WHERE id_sessao = '$id'";
 
         //Salva no bando de dados
         if (mysqli_query($conn, $sql)) {
             //Sucesso
-            header('Location: alterarSessao.php?msg=Sessão+Alterada+com+sucesso")');
+            header('Location: alterarSessao.php?msg=Sessão+Alterada+com+sucesso');
         } else {
             echo 'query error:' . mysqli_error($conn);
         }

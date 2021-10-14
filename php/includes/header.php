@@ -21,8 +21,8 @@
             <div class="nav-wrapper ">
                 <ul id="nav-mobile" class="right">
                     <li><a href="mostrarFilmes.php">Pagina de Filmes</a></li>
-                    <li><a href="cadastrarSessao.php" >Cadastrar Sessão</a></li>
-                    <li><a href="cadastrarSessao.php" >Comprar Ingresso</a></li>
+                    <li><a href="mostrar_Sessao.php" >Página de Sessões</a></li>
+                    <li><a href="cadastrarSessao.php" >Ingressos</a></li>
             </div>
             <div class="nav-header center ">
                 <h1>JBCine</h1>
