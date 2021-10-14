@@ -156,7 +156,7 @@ if (isset($_POST['enviar'])) {
                             </div>
                         </div>
                         <div class="card-action">
-                            <a class="btn waves-effect waves-light grey btn " href="index.php">Cancelar</a>
+                            <a class="btn waves-effect waves-light grey btn " href="mostrarFilmes.php">Cancelar</a>
                             <button class="btn waves-effect waves-light green " type="reset" name="action">Limpar
                                 <i class="material-icons right">send</i>
                             </button>

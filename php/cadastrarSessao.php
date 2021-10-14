@@ -108,14 +108,38 @@ if (isset($_POST['enviar'])) {
                         <!--Input do ID Filme--->
                         <div class="row">
                             <div class="input-field col s12">
-                                <input name="id_filme" id="id_filme" type="text" value="<?php echo $idFilme ?>">
+                            <!---datalist com código para gerar combobox dos valores no banco ---->
+                                <datalist name="id_filme" id="id_filme">
+                                    <option></option>
+                                    <?php
+                                    $result = "SELECT id FROM filmes";
+                                    $resultado = mysqli_query($conn, $result);
+
+                                    while ($row = mysqli_fetch_assoc($resultado)) {
+                                        echo '<option value="' . $row['id'] . '"> ' . $row['id'] . ' </option>';
+                                    }
+                                    ?>
+                                </datalist>
+                                <input name="id_filme" id="id_filme" type="text" list="id_filme" value="<?php echo $idFilme ?>">
                                 <label for="id_filme">ID do filme</label>
                             </div>
                         </div>
                         <!--Input do Numero da sala--->
                         <div class="row">
                             <div class="input-field col s12">
-                                <input name="num_sala" id="num_sala" type="number" value="<?php echo $num_sala ?>">
+                            <!---datalist com código para gerar combobox dos valores no banco ---->
+                            <datalist name="num_sala" id="num_sala">
+                                    <option></option>
+                                    <?php
+                                    $result = "SELECT num_sala FROM sala";
+                                    $resultado = mysqli_query($conn, $result);
+
+                                    while ($row = mysqli_fetch_assoc($resultado)) {
+                                        echo '<option value="' . $row['num_sala'] . '"> ' . $row['num_sala'] . ' </option>';
+                                    }
+                                    ?>
+                                </datalist>                                                  
+                                <input name="num_sala" id="num_sala" type="text" list = "num_sala" value="<?php echo $num_sala ?>">
                                 <label for="num_sala">Numero da sala</label>
                             </div>
                         </div>
@@ -150,7 +174,7 @@ if (isset($_POST['enviar'])) {
                             </div>
                         </div>
                         <div class="card-action">
-                            <a class="btn waves-effect waves-light grey btn " href="index.php">Cancelar</a>
+                            <a class="btn waves-effect waves-light grey btn " href="mostrar_Sessao.php">Cancelar</a>
                             <button class="btn waves-effect waves-light green " type="reset" name="action">Limpar
                                 <i class="material-icons right">send</i>
                             </button>
