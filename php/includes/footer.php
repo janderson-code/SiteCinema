@@ -8,10 +8,9 @@
               <div class="col l4 offset-l2 s12">
                 <h5 class="white-text">Mais</h5>
                 <ul>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                  <li><a class="grey-text text-lighten-3" href="mostrarFilmes.php">Filmes Cadastrados</a></li>
+                  <li><a class="grey-text text-lighten-3" href="mostrar_Sessao.php">Sessões Cadastradas</a></li>
+                  <li><a class="grey-text text-lighten-3" href="precoSessao.php">Tabela de Preços</a></li>
                 </ul>
               </div>
             </div>

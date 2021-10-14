@@ -8,7 +8,8 @@ $id_sessao = $_GET['id_sessao'];
 
 //Query de busca
 $sql = "SELECT s.id_sessao,s.id_filme,s.num_sala,s.horario,s.data_sessao,s.qtd_assento_disp,s.valor_ingresso,f.titulo, f.capa
-FROM sessao s INNER JOIN filmes f ON s.id_filme = f.id";
+FROM sessao s INNER JOIN filmes f ON s.id_filme = f.id 
+ORDER BY s.criadoem";
 
 
 
