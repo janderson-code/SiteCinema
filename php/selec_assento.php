@@ -66,13 +66,20 @@
             justify-content: space-between;
 
         }
+        .btn{
+            margin: 10px;
+
+        }
+        .padding {
+            margin-top: 15px;
+        }
 	</style>
 	
     <div class="container padding">
         <div class="card-panel">
             <h5 class="center-align">Escolha uma cadeira disponível para <b>Sessão <?php echo $numero?></b></h5>
             
-            <div class="center padding" style="margin-top: 10px;">
+            <div class="center padding">
 
                 <?php for ($i=1; $i < $qtdAssentos+1; $i++){?>
 
