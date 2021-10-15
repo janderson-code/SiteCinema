@@ -40,7 +40,7 @@ mysqli_close($conn);
            <div class="card  col l3">
                <div class="card-image">
                    <img src="<?= $sessoes['capa'] ?>" alt=""/>
-                   <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">payment</i></a>
+                   <a class="btn-floating halfway-fab waves-effect waves-light red" href="selec_assento.php?id_sessao =<?php echo $sessoes['id_sessao'] ?>&num_sala =<?php echo $sessoes['num_sala'] ?>"><i class="material-icons">payment</i></a>
                </div>
                <div class="card-content">
                  <p><b>Sessão :</b><?= $sessoes["id_sessao"] ?></p>
