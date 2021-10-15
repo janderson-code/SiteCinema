@@ -32,7 +32,7 @@ mysqli_close($conn);
     </section class="filmes">
     <br><br>
     <div class="center-align">
-        <a href="cadastrarSessao.php" class="waves-effect waves-light btn"><i class="material-icons left">add</i>Clique aqui para Cadastrar novas Sessões</a>
+        <h1>Sessões em aberto</h1>
     </div>
     <br><br>
     <div class="row">
@@ -40,6 +40,7 @@ mysqli_close($conn);
            <div class="card col s12 m6 l3">
                <div class="card-image">
                    <img src="<?= $sessoes['capa'] ?>" alt=""/>
+                   <a class="btn-floating halfway-fab waves-effect waves-light red" href="selec_assento.php?id_sessao=<?php echo $sessoes['id_sessao'] ?>&num_sala=<?php echo $sessoes['num_sala'] ?>"><i class="material-icons">payment</i></a>
                </div>
                <div class="card-content">
                  <p><b>Sessão :</b><?= $sessoes["id_sessao"] ?></p>

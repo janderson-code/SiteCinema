@@ -22,7 +22,7 @@
                 <ul id="nav-mobile" class="right">
                     <li><a href="mostrarFilmes.php">Pagina de Filmes</a></li>
                     <li><a href="mostrar_Sessao.php" >Página de Sessões</a></li>
-                    <li><a href="selec_assento.php" >Ingressos</a></li>
+                    <li><a href="ingressos.php" >Ingressos</a></li>
             </div>
             <div class="nav-header center ">
                 <h1>JBCine</h1>

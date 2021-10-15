@@ -14,7 +14,7 @@
     //Pega os resultados e coloca em um vetor
     $row_qtdAssentos = mysqli_fetch_assoc($resultado_qtdAssentos);
 
-    $qtdAssentos = $row_qtdAssentos['qtd_assentos_disp'];
+    $qtdAssentos = $row_qtdAssentos['qtd_assento_disp'];
 
     //Limpa o resultado da buscar
     mysqli_free_result($resultado_qtdAssentos);
@@ -42,15 +42,9 @@
 	<?php include('includes/header.php')?>
 
     <style>
-		.color-gray{
-			background: #aaa !important;
-            color: #000;
-		}
-        .color-blue{
-			background: blue !important;
-            color: #000;
-		}
         .board-blue{
+            
+            border-radius: 5px;
             width: 20%;
             margin: 0 auto;
             padding: 20px;
@@ -59,17 +53,24 @@
 
         }
         .board-gray{
+          
+            border-radius: 5px;
             width: 20%;
             margin: 0 auto;
+            margin-top: 7px;
             padding: 20px;
             background: #aaa;
             color: #fff;
+        }
+        .center{
+            justify-content: space-between;
+
         }
 	</style>
 	
     <div class="container padding">
         <div class="card-panel">
-            <h5 class="center-align">Escolha um assento disponível para <b>Sessão <?php echo $numero?></b></h5>
+            <h5 class="center-align">Escolha uma cadeira disponível para <b>Sessão <?php echo $numero?></b></h5>
             
             <div class="center padding" style="margin-top: 10px;">
 
@@ -77,11 +78,11 @@
 
                     <?php if (in_array($i, $assentos_ocupados)){?>
                        
-                        <input type="submit" name="sim" value="<?php echo $i?>" class="waves-effect waves-light btn padding margin color-gray">
+                        <input type="submit" name="sim" value="<?php echo $i?>" class="  waves-effect waves-light btn padding margin grey darken-1">
                        
                     <?php } else {?>
-                        <a href="detalhar_venda.php?num_assento=<?php echo $i?>&num_sessao=<?php echo $numero?>">
-                            <input type="submit" name="sim" value="<?php echo $i?>" class="waves-effect waves-light btn padding margin color-blue">
+                        <a href="dados_venda.php?num_assento=<?php echo $i?>&id_sessao=<?php echo $numero?>">
+                            <input type="submit" name="sim" value="<?php echo $i?>" class=" white-text waves-effect waves-light btn padding margin light-blue darken-2 " >
                         </a>
                     <?php } ?>
 
