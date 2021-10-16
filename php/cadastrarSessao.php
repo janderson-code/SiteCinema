@@ -162,7 +162,7 @@ if (isset($_POST['enviar'])) {
                         <!--Input Assento disponiveis--->
                         <div class="row">
                             <div class="input-field col s12">
-                                <input name="qtd_assento_disp" id="qtd_assento_disp" type="number" step="0.1" value="<?php echo $qtd_assento_disp ?>">
+                                <input name="qtd_assento_disp" id="qtd_assento_disp" type="number" value="<?php echo $qtd_assento_disp ?>">
                                 <label for="qtd_assento_disp">Quantidade de Assentos Disponiveis</label>
                             </div>
                         </div>

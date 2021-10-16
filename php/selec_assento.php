@@ -2,11 +2,11 @@
 
 	include('../config/conexao.php');
 
-    $numero = $_GET['id_sessao'];
+    $num_sessao = $_GET['id_sessao'];
 
     $num_sala = $_GET['num_sala'];
 
-    $sql_qtdAssentos = "SELECT qtd_assento_disp FROM sessao WHERE num_sala = '$num_sala'";
+    $sql_qtdAssentos = "SELECT qtd_assento_disp FROM sessao WHERE num_sala = '$num_sala' AND id_sessao = '$num_sessao'";
 
     //Armazena os resultados da buscar
     $resultado_qtdAssentos = mysqli_query($conn,$sql_qtdAssentos);
@@ -19,7 +19,7 @@
     //Limpa o resultado da buscar
     mysqli_free_result($resultado_qtdAssentos);
 
-    $sql_assentosVendidos = "SELECT num_assento_vendido FROM vendas WHERE id_sessao = '$numero'";
+    $sql_assentosVendidos = "SELECT num_assento_vendido FROM vendas WHERE id_sessao = '$num_sessao'";
 
     //Armazena os resultados da buscar
     $resultado_assentosVendidos = mysqli_query($conn,$sql_assentosVendidos);
@@ -62,10 +62,6 @@
             background: #aaa;
             color: #fff;
         }
-        .center{
-            justify-content: space-between;
-
-        }
         .btn{
             margin: 10px;
 
@@ -77,7 +73,7 @@
 	
     <div class="container padding">
         <div class="card-panel">
-            <h5 class="center-align">Escolha uma cadeira disponível para <b>Sessão <?php echo $numero?></b></h5>
+            <h5 class="center-align">Escolha uma cadeira disponível para <b>Sessão <?php echo $num_sessao?></b></h5>
             
             <div class="center padding">
 
@@ -88,7 +84,7 @@
                         <input type="submit" name="sim" value="<?php echo $i?>" class="  waves-effect waves-light btn padding margin grey darken-1">
                        
                     <?php } else {?>
-                        <a href="dados_venda.php?num_assento=<?php echo $i?>&id_sessao=<?php echo $numero?>">
+                        <a href="dados_venda.php?num_assento=<?php echo $i?>&id_sessao=<?php echo $num_sessao?>">
                             <input type="submit" name="sim" value="<?php echo $i?>" class=" white-text waves-effect waves-light btn padding margin light-blue darken-2 " >
                         </a>
                     <?php } ?>
