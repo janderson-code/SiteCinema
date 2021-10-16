@@ -132,7 +132,7 @@ if (isset($_POST['enviar'])) {
                         <!--Input da Capa--->
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="capa" name="capa" type="text" value="<?php echo $filmes['capa'] ?> " maxlength="1">
+                                <input id="capa" name="capa" type="text" value="<?php echo $filmes['capa'] ?> " >
                                 <label for="capa">Capa URL</label>
                                 <div class="red-text"><?php echo $erros['capa'] . '</br>'; ?></div>
                             </div>
@@ -140,7 +140,7 @@ if (isset($_POST['enviar'])) {
                         <!--Input Cartaz--->
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="is_cartaz" name="is_cartaz" type="text" value="<?php echo $filmes['is_cartaz'] ?>">
+                                <input maxlength="1" id="is_cartaz" name="is_cartaz" type="text" value="<?php echo $filmes['is_cartaz'] ?>">
                                 <label for="is_cartaz">Em cartaz?</label>
                             </div>
                         </div>
