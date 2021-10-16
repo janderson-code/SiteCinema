@@ -52,12 +52,11 @@ mysqli_close($conn);
             </div>
                <div class="card-action">
                    <a class="waves-effect waves-light btn-small blue" href="alterarSessao.php?id_sessao=<?php echo $sessoes['id_sessao'] ?>"><i class="material-icons right">edit</i></a>
-                    <button class="waves-effect waves-light btn-small red " onclick="excluir(<?= $sessoes['id_sessao'] ?>)"><i class="material-icons right">delete</i></button>
+                    <button href = "" class="waves-effect waves-light btn-small red " onclick="excluir(<?= $sessoes['id_sessao'] ?>)"><i class="material-icons right">delete</i></button>
                </div>
            </div>
         <?php endforeach ?>
     </div>
-
 </main>
 <?php include('includes/footer.php'); ?>
 </body>
