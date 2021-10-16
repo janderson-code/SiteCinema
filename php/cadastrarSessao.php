@@ -108,7 +108,7 @@ if (isset($_POST['enviar'])) {
                         <!--Input do ID Filme--->
                         <div class="row">
                             <div class="input-field col s12">
-                            <!---datalist com código para gerar combobox dos valores no banco ---->
+                                <!---datalist com código para gerar combobox dos valores no banco ---->
                                 <datalist name="id_filme" id="id_filme">
                                     <option></option>
                                     <?php
@@ -127,8 +127,8 @@ if (isset($_POST['enviar'])) {
                         <!--Input do Numero da sala--->
                         <div class="row">
                             <div class="input-field col s12">
-                            <!---datalist com código para gerar combobox dos valores no banco ---->
-                            <datalist name="num_sala" id="num_sala">
+                                <!---datalist com código para gerar combobox dos valores no banco ---->
+                                <datalist name="num_sala" id="num_sala">
                                     <option></option>
                                     <?php
                                     $result = "SELECT num_sala FROM sala";
@@ -138,8 +138,8 @@ if (isset($_POST['enviar'])) {
                                         echo '<option value="' . $row['num_sala'] . '"> ' . $row['num_sala'] . ' </option>';
                                     }
                                     ?>
-                                </datalist>                                                  
-                                <input name="num_sala" id="num_sala" type="text" list = "num_sala" value="<?php echo $num_sala ?>">
+                                </datalist>
+                                <input name="num_sala" id="num_sala" type="text" list="num_sala" value="<?php echo $num_sala ?>">
                                 <label for="num_sala">Numero da sala</label>
                             </div>
                         </div>

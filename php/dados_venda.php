@@ -26,10 +26,19 @@ mysqli_close($conn);
 
 ?>
 <?php include('includes/header.php'); ?>
+<style>
+    p{
+        font-size:1.5em;
+    }
+    .btn{
+        height:80px;
+        font-size: 20px;
 
+    }
+</style>
 <div class="row ">
     <?php foreach ($dados_venda as $dados_vendas) : ?>
-        <div class="col s12 m7 offset-l3">
+        <div class="col s12 m8 l6 offset-l3 ">
             <h2 class="header center">Finalizando compra</h2>
             <div class="card horizontal">
                 <div class="card-image">

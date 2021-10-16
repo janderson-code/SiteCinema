@@ -45,7 +45,7 @@ if (mysqli_query($conn, $sql)) {
 <h5 class="header center">Este é o seu ingresso Digital</h5>
 <div class="row ">
     <?php foreach ($dados_venda as $dados_vendas) : ?>
-        <div class="col offset-s4 offset-m4 offset-l5">
+        <div class="col s5 m3 l2 offset-s4 offset-m4 offset-l5">
 
             <div class="card ">
                 <div class="card light-blue darken-1 center white-text">
