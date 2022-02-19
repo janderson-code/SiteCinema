@@ -1,7 +1,12 @@
 
-<iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:6854973628816121856" height="897" width="504" frameborder="0" allowfullscreen="" title="Publicação incorporada"></iframe>
+
 
 # SiteCinema
+Link do vídeo de apresentação no Linkedin
+https://www.linkedin.com/posts/janderson-barbosa-b1889411b_javascript-php-html-activity-6854974007540817920-VoBs
+
+#Descrição :
+
 Projeto de Criação de site para um cinema
 
 Front-End :HTML ,CSS ,Materialize.
