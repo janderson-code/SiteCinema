@@ -3,7 +3,7 @@
 
 # SiteCinema
 
-<a href = "https://www.linkedin.com/posts/janderson-barbosa-b1889411b_javascript-php-html-activity-6854974007540817920-VoBs "> CLIQUE AQUI PARA VER VÍDEO DE APRESENTAÇÃO DO PROJETO DE SITE PARA GESTÃO DE CINEMA </a>
+<a href = "https://www.linkedin.com/posts/janderson-barbosa-b1889411b_javascript-php-html-activity-6854974007540817920-VoBs " target = "_blank"> CLIQUE AQUI PARA VER VÍDEO DE APRESENTAÇÃO DO PROJETO DE SITE PARA GESTÃO DE CINEMA </a>
 
 <h1>Descrição : </h1>
 
